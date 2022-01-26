@@ -1,29 +1,30 @@
-import numpy as np
-from collections import deque #Libreria para Listas
+from collections import deque
+
+class Nodo:
+    def __init__(self, valor, next = None):
+        self.valor = valor
+        self.next = next
 
 class GraphAL:
     def __init__(self, size):
-      self.arregloDeLista = [0]*size
-      for i in range(0,size):
-         arregloDeLista[i] = deque()
-
-    def addArc(self, vertex, edge, weight):
-        fila = self.arregloDeLista[vertex]
+        self.arregloDeListas = [0]*size
+        for i in range(0,size):
+            self.arregloDeListas[i] = deque()
+            
+    def esta_vacia(self):
+        return self.head == None #CONDICIONAL DEVUELVE BOOLEAN
+        
+    def addArc(self, vertex, destination, weight):
+        fila = self.arregloDeListas[vertex]
         parejaDestinoPeso = (destination, weight)
-        fila.append(parejaDestinoPeso)  #appendleft para añadir al inicio.
-
-
+        fila.append(parejaDestinoPeso)
+        
     def getSuccessors(self, vertice):
-        filaVertice = self.arregloDeLista[vertice]
-      respuesta = []
-      
-      for j in range(0,size):
-        if filaVertice[j] != 0:
-           respuesta.append(j)
-      return respuesta
-
-
+        for i in range(0,vertice):
+            successors = self.arregloDeListas
+            return successors
+            
     def getWeight(self, source, destination):
-        return self.arregloDeLista[source][destination]
-
-
+        for i in range(0,destination):
+            weight = self.arregloDeListas
+            return weight
