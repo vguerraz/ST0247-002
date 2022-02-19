@@ -1,73 +1,58 @@
-salida = "BICOLORABLE"
+def clasificar(n, lista1, lista2, conexiones):
+  for j in range(0, n):
+    for k in range(0, 2):
+      if conexiones[j][k] in lista1 or conexiones[j][k] in lista2:
+        continue
+      else:
+        if k == 0:
+          if conexiones[j][k+1] in lista1:
+            lista2.append(conexiones[j][k])
+          else:
+            lista1.append(conexiones[j][k])
+        else:
+          if conexiones[j][k-1] in lista1:
+            lista2.append(conexiones[j][k])
+          else: 
+            lista1.append(conexiones[j][k])
 
-print("Ingrese el número de nodos")
-
-n = int(input())
-
-if n>200 or n<1:
-
-  print("Excede el límite de nodos")
-
+def ordenar(conexiones):
+  for i in range(1,len(conexiones)):
+    for j in range(0,len(conexiones)-i):
+      if(conexiones[j+1][0]+conexiones[j+1][1] > conexiones[j][0]+conexiones[j][1]):
+        aux=conexiones[j]
+        conexiones[j]=conexiones[j+1]
+        conexiones[j+1]=aux
   
+def verificar(lista1, conexiones):
+  for l in range(len(lista1)):
+    for m in range(len(lista1)):
+      if lista1[l] != lista1[m]:
+        if [lista1[l], lista1[m]] in conexiones or [lista1[m], lista1[l]] in conexiones: 
+          return False
+      return True
 
-print("Ingrese el número de arcos")
+def main():
+  print("Ingrese el número de nodos")
+  n = int(input())
+  while n > 0 and n < 200:
+    print("Ingrese el número de arcos")
+    arcos = int(input())
+    
+    conexiones = []
+    print("Ingrese las conexiones del grafo")
+    for i in range(0, arcos):
+      conexiones.append(list(map(int,input().split())))##Guarda todas las conexiones en una lista
+    ordenar(conexiones)
+    
+    color1 = []
+    color2 = []
+    clasificar(arcos, color1, color2, conexiones)
+    if (verificar(color1, conexiones) and verificar(color2, conexiones)) == True:
+      print("BICOLORABLE")
+    else:
+      print("NOT BICOLORABLE")
 
-arcos = int(input())
+    print("Ingrese el número de nodos")
+    n = int(input())
 
-conexiones = []
-
-print("Ingrese las conexiones del grafo")
-
-for i in range (0, arcos):
-
-  conexiones.append(list(map(int, input().split()))) ##Guarda todas las conexiones en una lista
-
-print(conexiones)
-
-color1 = [] 
-
-color2 = []
-
-for j in range (0, arcos):
-
-  for k in range (0, 2):
-
-    if conexiones[j][k] in color1:
-
-      color1.remove(conexiones[j][k]) ##Si se repite un elemento en color1 entonces pasa a color2
-
-      if conexiones[j][k] not in color2:
-
-        color2.append(conexiones[j][k])
-
-    else: 
-
-      color1.append(conexiones [j][k])
-
-for l in range (len(color1)):
-
-  for m in range (len(color1)):
-
-    if color1[l] < color1[m]:
-
-      if [color1[l], color1[m]] in conexiones: ##Si los elementos de la misma lista se conectan
-
-        salida = "NOT BICOLORABLE"
-
-for l in range (len(color2)):
-
-  for m in range (len(color2)):
-
-    if color2[l] < color2[m]:
-
-      if [color2[l], color2[m]] in conexiones: ##Si los elementos de la misma lista se conectan
-
-        salida = "NOT BICOLORABLE"
-
-  
-
-print("color 1",color1)
-
-print("color 2",color2)
-
-print(salida)
+main()
