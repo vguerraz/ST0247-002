@@ -1,7 +1,5 @@
 from collections import deque
-import math
 
-infinity = math.inf
 
 class GraphAL:
     def __init__(self, size):
