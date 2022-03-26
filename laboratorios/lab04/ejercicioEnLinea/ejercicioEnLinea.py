@@ -1,6 +1,4 @@
 def rutas(mañana : list, tarde : list, limite : int, valor : int):
-  mañana.sort()
-  tarde.sort()
   horasextra = 0
   for i in range (0, len(mañana)):
     tiempo = max(mañana)+min(tarde)
