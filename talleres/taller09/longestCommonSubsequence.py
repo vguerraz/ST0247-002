@@ -1,6 +1,6 @@
 import numpy as np
 
-#Longest common subsequence - Recursion
+# ---------------------  Longest common subsequence - Recursion -------------------------
 
 def lcs(A : str, B : str) -> int:
   return lcsAux(A,B,0,0) 
@@ -20,8 +20,10 @@ def main():
 
 main()
 
-#Longest common subsequence - Dynamic programming
+#Complejidad: Dos llamados recursivos ----> 0(2**n)
 
+
+# -----------------------------------  Longest common subsequence - Dynamic programming -------------------------------------------
   #1. Creo la estructura de datos que va a representar el stack
   #2.Llenar la tabla
 
@@ -38,5 +40,7 @@ def lcs_DP(A:str, B:str ):
        stack[i][j] = max(stack[i-1][j], stack[i][j-1])
 
   return stack[len(A)][len(B)]
+
+# Complejidad: 0(nm) donde n repreneta la longitud de la cadena A+1 y m la longitud de B+1
 
 print(lcs_DP( "casita" , "mamita"))
